@@ -77,9 +77,9 @@ app.post('/todos', (req, res) => {
   return res.status(201).json(newTodo)
 });
 
-app.put('/todos/:id', (req, res) => {
-  const { title, deadline } = req.body
+app.put('/todos/:id' ,(req, res) => {
   const { user } = req
+  const { title, deadline } = req.body
   const { id } = req.params
 
   const todo = user.todos.find(todo => todo.id === id)
@@ -89,9 +89,9 @@ app.put('/todos/:id', (req, res) => {
   }
 
   todo.title = title
-  todo.deadline = deadline
+  todo.deadline = new Date(deadline)
 
-  return res.status(204)
+  return res.json(todo)
 });
 
 app.patch('/todos/:id/done', (req, res) => {
